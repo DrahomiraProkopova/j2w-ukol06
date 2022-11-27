@@ -7,12 +7,12 @@ import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -40,7 +40,7 @@ public class VizitkaController {
     }
 
     @GetMapping("/detail/{id}")
-    public ModelAndView detail(@PathVariable int id) {
+    public Object detail(@PathVariable int id) {
 
         Optional<Vizitka> byId = vizitkaRepository.findById(id);
         if (byId.isPresent()) {
@@ -48,6 +48,23 @@ public class VizitkaController {
             result.addObject("vizitka", byId.get());
             return result;
         }
-        return new ModelAndView("vizitka", HttpStatus.NOT_FOUND);
+        return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/nova")
+    public ModelAndView novaVizitka() {
+        return new ModelAndView("formular").addObject("vizitka", new Vizitka());
+    }
+
+    @PostMapping("/nova")
+    public Object save(@ModelAttribute("vizitka") @Valid Vizitka vizitka, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "formular";
+        }
+
+        vizitkaRepository.save(vizitka);
+        return "seznam";
+    }
+
+
 }
