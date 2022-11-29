@@ -68,4 +68,44 @@ public class Vizitka {
     public String getCelaAdresa() {
         return ulice + " " + obec + " " + psc;
     }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setCeleJmeno(String celeJmeno) {
+        this.celeJmeno = celeJmeno;
+    }
+
+    public void setFirma(String firma) {
+        this.firma = firma;
+    }
+
+    public void setUlice(String ulice) {
+        this.ulice = ulice;
+    }
+
+    public void setObec(String obec) {
+        this.obec = obec;
+    }
+
+    public void setPsc(String psc) {
+        this.psc = psc;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setTelefon(String telefon) {
+        this.telefon = telefon;
+    }
+
+    public void setWeb(String web) {
+        this.web = web;
+    }
+
+    public void setCelaAdresa(String celaAdresa) {
+        this.celaAdresa = celaAdresa;
+    }
 }

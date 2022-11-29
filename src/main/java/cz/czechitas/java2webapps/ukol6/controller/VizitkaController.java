@@ -63,7 +63,7 @@ public class VizitkaController {
         }
 
         vizitkaRepository.save(vizitka);
-        return "seznam";
+        return "redirect:/";
     }
 
 
